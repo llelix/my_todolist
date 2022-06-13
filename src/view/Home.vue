@@ -1,28 +1,32 @@
 <template>
   <div class="app">
-    <el-dropdown>
-  <span class="el-dropdown-link">
-    下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
+    <el-button type="danger" @click="clv()">危险按钮</el-button>
+    <span v-bind:title="img_url">
+    鼠标悬停几秒钟查看此处动态绑定的提示信息！
   </span>
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item>黄金糕</el-dropdown-item>
-    <el-dropdown-item>狮子头</el-dropdown-item>
-    <el-dropdown-item>螺蛳粉</el-dropdown-item>
-    <el-dropdown-item disabled>双皮奶</el-dropdown-item>
-    <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
-  </el-dropdown-menu>
-</el-dropdown>
   </div>
 </template>
 
-<script>
+<script> 
+import { getproduct } from '../util/api.js'
 export default {
   name: 'Home',
   data () {
     return {
-      msg: 'Welcome to Home'
+      msg: {page:1},
+      img_url: '',
     }
-  }
+  },
+  methods: {
+    clv() {
+      console.dir(getproduct);
+      getproduct(this.msg).then(res => {
+        console.log(res);
+        this.img_url=res.data[0].img;
+      })
+
+    }
+}
 }
 </script>
 
