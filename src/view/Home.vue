@@ -1,9 +1,9 @@
 <template>
   <div class="app">
-    <el-button type="danger" @click="clv()">危险按钮</el-button>
-    <span v-bind:title="img_url">
-    鼠标悬停几秒钟查看此处动态绑定的提示信息！
-  </span>
+    <el-button type="danger" @click="clv()">{{btu}}</el-button>
+
+    <img :src="img_url"/>
+
   </div>
 </template>
 
@@ -15,16 +15,19 @@ export default {
     return {
       msg: {page:1},
       img_url: '',
+      btu:'点击'
     }
   },
   methods: {
     clv() {
-      console.dir(getproduct);
+
+      //console.dir(getproduct);
       getproduct(this.msg).then(res => {
         console.log(res);
-        this.img_url=res.data[0].img;
+        this.img_url=res.data.data[2].img;
+        this.btu=res.data.data[2].img;
       })
-
+      console.log(this.img_url);
     }
 }
 }

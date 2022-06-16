@@ -14,5 +14,10 @@ export default new Router({
       path: '/home',
       component: () => import('@/view/Home.vue')
     },
+    {
+      path: '/dict',
+      component: () => import('@/view/Dict.vue')
+    },
+
   ]
 })
